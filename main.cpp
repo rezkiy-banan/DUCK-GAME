@@ -1,21 +1,15 @@
 #include <SFML/Graphics.hpp>
+#include "Player.hpp"
+#include "Constants.hpp"
 
 int main()
 {
-    // Создаем окно SFML
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Перемещение персонажей");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Your Game Title");
+    sf::Clock clock;
 
-    // Создаем персонажа (синий квадрат)
-    sf::RectangleShape player1(sf::Vector2f(50, 50));
-    player1.setFillColor(sf::Color::Blue);
-    player1.setPosition(375, 275);
+    Player player1(100.0f, 100.0f, sf::Color::Blue);
+    Player player2(700.0f, 100.0f, sf::Color::Red);
 
-    // Создаем второго персонажа (красный квадрат)
-    sf::RectangleShape player2(sf::Vector2f(50, 50));
-    player2.setFillColor(sf::Color::Red);
-    player2.setPosition(375, 325);
-
-    // Основной цикл программы
     while (window.isOpen())
     {
         sf::Event event;
@@ -25,50 +19,15 @@ int main()
                 window.close();
         }
 
-        // Обработка клавиш WASD для синего квадрата
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        {
-            player1.move(0, -0.5); // Двигаем синий квадрат вверх
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        {
-            player1.move(0, 0.5); // Двигаем синий квадрат вниз
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        {
-            player1.move(-0.5, 0); // Двигаем синий квадрат влево
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        {
-            player1.move(0.5, 0); // Двигаем синий квадрат вправо
-        }
+        sf::Time elapsed = clock.restart();
+        float dt = elapsed.asSeconds();
 
-        // Обработка клавиш стрелок для красного квадрата
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-            player2.move(0, -0.5); // Двигаем красный квадрат вверх
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
-            player2.move(0, 0.5); // Двигаем красный квадрат вниз
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            player2.move(-0.5, 0); // Двигаем красный квадрат влево
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            player2.move(0.5, 0); // Двигаем красный квадрат вправо
-        }
+        player1.move(dt);
+        player2.move(dt);
 
-        // Очищаем окно
         window.clear();
-
-        // Рисуем персонажей
-        window.draw(player1);
-        window.draw(player2);
-
-        // Обновляем окно
+        player1.draw(window);
+        player2.draw(window);
         window.display();
     }
 
