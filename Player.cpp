@@ -6,10 +6,13 @@ const float Player::SPEED = PLAYER_SPEED;
 
 Player::Player(const sf::Vector2f& position, const sf::Keyboard::Key up, const sf::Keyboard::Key left,
 	const sf::Keyboard::Key down, const sf::Keyboard::Key right, const sf::Color& color)
-	:health(MAX_HEALTH), moveUp(up), moveLeft(left), moveDown(down), moveRight(right), velocity(0.0f, 0.0f), isJumping(false){
+	: moveUp(up), moveLeft(left), moveDown(down), moveRight(right), velocity(0.0f, 0.0f), isJumping(false)
+{
+	health = MAX_HEALTH;
 	sprite.setFillColor(color);
 	sprite.setSize(sf::Vector2f(PLAYER_WIDTH, PLAYER_HEIGHT));
 	sprite.setPosition(position);
+
 	//healthBar.setSize(sf::Vector2f(50, 3));  // примерный размер
 	//healthBar.setFillColor(sf::Color::Green);
 
@@ -18,6 +21,7 @@ Player::Player(const sf::Vector2f& position, const sf::Keyboard::Key up, const s
 	if (!font.loadFromFile("font.ttf")) {
 		std::cerr << "Failed to load font." << std::endl;
 	}
+	healthText.setString(std::to_string(health));
 
 	healthText.setFont(font);
 	healthText.setCharacterSize(20); // Размер текста
@@ -110,9 +114,12 @@ void Player::update(float deltaTime) {
 
 void Player::draw(sf::RenderWindow& window) {
 	window.draw(sprite);
-//	if (health > MAX_HEALTH) {
-	//	health = MAX_HEALTH;
-//	}
+	if (health > MAX_HEALTH) {
+		health = MAX_HEALTH;
+}
+	if (health < -100) {
+		health = MAX_HEALTH;
+	}
 //	healthBarBackground.setPosition(sprite.getPosition().x, sprite.getPosition().y - 10);  // 10 - это расстояние над персонажем
 //	healthBar.setSize(sf::Vector2f(((float)health/MAX_HEALTH), 5));
 //	healthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y - 10);
