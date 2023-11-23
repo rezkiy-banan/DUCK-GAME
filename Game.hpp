@@ -2,16 +2,22 @@
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
 
+class Player;
 class Game {
 public:
     Game();
     void run();
 
 private:
+    sf::Keyboard::Key player1FireKey;
+    sf::Keyboard::Key player2FireKey;
+
+    // Добавленные методы
+    void updatePistols(float deltaTime);
     void processEvents();
     void update(float deltaTime);
     void render();
-    void updatePistols(float deltaTime);
+    
     void renderPistols();
 
     sf::RenderWindow window;

@@ -7,7 +7,7 @@ class Pistol : public Weapon {
 public:
     Pistol();
     void fire(sf::Vector2f position, sf::Vector2f direction) override;
-    void update(float deltaTime);  // Remove const here
+    void update(float deltaTime, sf::Keyboard::Key fireKey, sf::Vector2f playerPosition);  // Remove const here
     void draw(sf::RenderWindow& window);
 
 private:

@@ -7,7 +7,7 @@ public:
     Player(const std::string& texturePath, const sf::Vector2f& position,
         const sf::Keyboard::Key up, const sf::Keyboard::Key left,
         const sf::Keyboard::Key down, const sf::Keyboard::Key right,
-        const sf::Color& color);
+        const sf::Color& color, const sf::Keyboard::Key fireKey);
     void handleInput();
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
@@ -22,7 +22,8 @@ public:
     const Pistol& getPistol() const;
     void fire();
 
-private:
+private: 
+
     sf::Text healthText;
     sf::Font font;
     int health;
@@ -39,6 +40,7 @@ private:
     sf::Keyboard::Key moveLeft;
     sf::Keyboard::Key moveDown;
     sf::Keyboard::Key moveRight;
+    sf::Keyboard::Key fireKey;
     const float GRAVITY = 10000.0f;
     float accelerationY = 0.0f;
     const float MAX_FALL_SPEED = 400.0f;

@@ -13,10 +13,13 @@ void Pistol::fire(sf::Vector2f position, sf::Vector2f direction) {
     }
 }
 
-void Pistol::update(float deltaTime) {
+void Pistol::update(float deltaTime, sf::Keyboard::Key fireKey, sf::Vector2f playerPosition) {
     timeSinceLastShot += deltaTime;
 
-    // Use std::remove_if followed by erase
+    if (sf::Keyboard::isKeyPressed(fireKey)) {
+        fire(playerPosition, sf::Vector2f(1.0f, 0.0f));
+    }
+
     bullets.erase(std::remove_if(bullets.begin(), bullets.end(),
         [&](const Bullet& bullet) {
             return bullet.getPosition().x < 0 ||
@@ -26,7 +29,6 @@ void Pistol::update(float deltaTime) {
         }),
         bullets.end());
 
-    // Update remaining bullets
     for (auto& bullet : bullets) {
         bullet.update(deltaTime);
     }

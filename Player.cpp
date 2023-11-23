@@ -8,9 +8,9 @@ const float Player::SPEED = PLAYER_SPEED;
 Player::Player(const std::string& texturePath, const sf::Vector2f& position,
 	const sf::Keyboard::Key up, const sf::Keyboard::Key left,
 	const sf::Keyboard::Key down, const sf::Keyboard::Key right,
-	const sf::Color& color)
+	const sf::Color& color, const sf::Keyboard::Key fireKey)
 	: moveUp(up), moveLeft(left), moveDown(down), moveRight(right),
-	velocity(0.0f, 0.0f), isJumping(false), pistol() {
+	velocity(0.0f, 0.0f), isJumping(false), pistol(), fireKey(fireKey) {
 	health = MAX_HEALTH;
 
 	if (!texture.loadFromFile(texturePath)) {
@@ -75,6 +75,9 @@ void Player::handleInput() {
 		velocity.x += SPEED;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		fire();
+	}
+	if (sf::Keyboard::isKeyPressed(fireKey)) {
 		fire();
 	}
 }
@@ -146,6 +149,7 @@ void Player::setPosition(const sf::Vector2f& position) {
 sf::Vector2f Player::getPosition() const {
 	return sprite.getPosition();
 }
+
 Pistol& Player::getPistol() {
 	return pistol;
 }

@@ -3,8 +3,9 @@
 
 Game::Game()
     : window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Duck Game Clone"),
-    player1("player1.png", { 100, WINDOW_HEIGHT / 2 }, sf::Keyboard::W, sf::Keyboard::A, sf::Keyboard::S, sf::Keyboard::D, sf::Color::Blue),
-    player2("player2.png", { WINDOW_WIDTH - 100, WINDOW_HEIGHT / 2 }, sf::Keyboard::Up, sf::Keyboard::Left, sf::Keyboard::Down, sf::Keyboard::Right, sf::Color::Red) {
+    player1("player1.png", { 100, WINDOW_HEIGHT / 2 }, sf::Keyboard::W, sf::Keyboard::A, sf::Keyboard::S, sf::Keyboard::D, sf::Color::Blue, sf::Keyboard::Space),
+    player2("player2.png", { WINDOW_WIDTH - 100, WINDOW_HEIGHT / 2 }, sf::Keyboard::Up, sf::Keyboard::Left, sf::Keyboard::Down, sf::Keyboard::Right, sf::Color::Red, sf::Keyboard::Return),
+    player1FireKey(sf::Keyboard::Space), player2FireKey(sf::Keyboard::RShift) {
 }
 void Game::run() {
     sf::Clock clock;
@@ -46,8 +47,8 @@ void Game::render() {
 // Имплементация новых методов
 
 void Game::updatePistols(float deltaTime) {
-    player1.getPistol().update(deltaTime);
-    player2.getPistol().update(deltaTime);
+    player1.getPistol().update(deltaTime, player1FireKey, player1.getPosition());
+    player2.getPistol().update(deltaTime, player2FireKey, player2.getPosition());
 }
 
 void Game::renderPistols() {
