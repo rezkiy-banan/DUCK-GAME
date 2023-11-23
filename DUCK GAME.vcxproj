@@ -132,14 +132,24 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.hpp" />
     <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="Pistol.hpp" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="Weapon.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Downloads\player1.png" />
+    <Image Include="..\..\..\Downloads\player2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
