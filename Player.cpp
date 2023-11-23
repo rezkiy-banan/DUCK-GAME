@@ -40,6 +40,9 @@ void Player::takeDamage(int amount) {
 
 	healthText.setString(std::to_string(health));
 }
+void Player::fire() {
+	getPistol().fire(getPosition(), sf::Vector2f(1.0f, 0.0f));
+}
 
 void Player::heal(int amount) {
 	health += amount;
@@ -70,6 +73,9 @@ void Player::handleInput() {
 
 	if (sf::Keyboard::isKeyPressed(moveRight)) {
 		velocity.x += SPEED;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		fire();
 	}
 }
 

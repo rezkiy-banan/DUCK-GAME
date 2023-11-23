@@ -20,6 +20,7 @@ public:
     int getHealth() const;
     Pistol& getPistol();
     const Pistol& getPistol() const;
+    void fire();
 
 private:
     sf::Text healthText;

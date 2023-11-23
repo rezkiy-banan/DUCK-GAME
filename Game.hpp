@@ -11,6 +11,8 @@ private:
     void processEvents();
     void update(float deltaTime);
     void render();
+    void updatePistols(float deltaTime);
+    void renderPistols();
 
     sf::RenderWindow window;
     Player player1;
