@@ -74,9 +74,7 @@ void Player::handleInput() {
 	if (sf::Keyboard::isKeyPressed(moveRight)) {
 		velocity.x += SPEED;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-		fire();
-	}
+	
 	if (sf::Keyboard::isKeyPressed(fireKey)) {
 		fire();
 	}
