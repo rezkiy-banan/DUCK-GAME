@@ -39,4 +39,3 @@ void Pistol::draw(sf::RenderWindow& window) {
         bullet.draw(window);
     }
 }
-

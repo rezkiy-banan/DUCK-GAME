@@ -1,4 +1,4 @@
-// Ваш файл Player.cpp
+п»ї
 #include "Player.hpp"
 #include "Constants.hpp"
 #include <iostream>
@@ -69,10 +69,12 @@ void Player::handleInput() {
 
 	if (sf::Keyboard::isKeyPressed(moveLeft)) {
 		velocity.x -= SPEED;
+		direction = Direction::Left;  // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅР°РїСЂР°РІР»РµРЅРёРµ РЅР°Р»РµРІРѕ
 	}
 
 	if (sf::Keyboard::isKeyPressed(moveRight)) {
 		velocity.x += SPEED;
+		direction = Direction::Right;  // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅР°РїСЂР°РІР»РµРЅРёРµ РЅР°РїСЂР°РІРѕ
 	}
 	
 	if (sf::Keyboard::isKeyPressed(fireKey)) {
@@ -92,10 +94,10 @@ void Player::jump() {
 void Player::move(float dt) {
 	sprite.move(velocity.x * dt, velocity.y * dt);
 
-	// Получение ограничивающего прямоугольника спрайта
+	
 	sf::FloatRect bounds = sprite.getLocalBounds();
 
-	// Проверка столкновения с "землей"
+	
 	if (sprite.getPosition().y + bounds.height >= WINDOW_HEIGHT) {
 		sprite.setPosition(sprite.getPosition().x, WINDOW_HEIGHT - bounds.height);
 		isJumping = false;
@@ -106,12 +108,12 @@ void Player::move(float dt) {
 void Player::update(float deltaTime) {
 	velocity.y += GRAVITY * deltaTime;
 
-	// Ограничение скорости падения
+	
 	velocity.y = std::min(velocity.y, MAX_FALL_SPEED);
 
 	sprite.move(velocity * deltaTime);
 
-	// Ограничение позиции по Y
+	
 	float minY = WINDOW_HEIGHT - sprite.getLocalBounds().height;
 	sprite.setPosition(sprite.getPosition().x, std::min(sprite.getPosition().y, minY));
 
@@ -136,7 +138,18 @@ void Player::draw(sf::RenderWindow& window) {
 	if (health < -100) {
 		health = MAX_HEALTH;
 	}
+	if (direction == Direction::Left) {
+		// Р•СЃР»Рё РїРµСЂСЃРѕРЅР°Р¶ РґРІРёРіР°РµС‚СЃСЏ РІР»РµРІРѕ, РѕС‚СЂР°Р¶Р°РµРј СЃРїСЂР°Р№С‚
+		sprite.setScale(-1.0f, 1.0f);
+		sprite.setOrigin(PLAYER_WIDTH, 0);
+	}
+	else {
+		// Р•СЃР»Рё РїРµСЂСЃРѕРЅР°Р¶ РґРІРёРіР°РµС‚СЃСЏ РІРїСЂР°РІРѕ, СЃР±СЂР°СЃС‹РІР°РµРј РѕС‚СЂР°Р¶РµРЅРёРµ СЃРїСЂР°Р№С‚Р°
+		sprite.setScale(1.0f, 1.0f);
+		sprite.setOrigin(0, 0);
+	}
 
+	window.draw(sprite);
 	window.draw(healthText);
 }
 

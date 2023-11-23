@@ -1,6 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Pistol.hpp"
+enum class Direction {
+    Left,
+    Right
+};
 
 class Player {
 public:
@@ -21,8 +25,9 @@ public:
     Pistol& getPistol();
     const Pistol& getPistol() const;
     void fire();
+    Direction direction;
 
-private: 
+private:
 
     sf::Text healthText;
     sf::Font font;

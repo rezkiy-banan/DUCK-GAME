@@ -34,7 +34,7 @@ void Game::update(float deltaTime) {
     updatePistols(deltaTime);
 }
 
-// В методе render() добавьте вызов renderPistols()
+
 
 void Game::render() {
     window.clear();
@@ -44,7 +44,7 @@ void Game::render() {
     window.display();
 }
 
-// Имплементация новых методов
+
 
 void Game::updatePistols(float deltaTime) {
     player1.getPistol().update(deltaTime, player1FireKey, player1.getPosition());

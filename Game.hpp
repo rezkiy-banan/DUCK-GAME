@@ -12,12 +12,12 @@ private:
     sf::Keyboard::Key player1FireKey;
     sf::Keyboard::Key player2FireKey;
 
-    // Добавленные методы
+ 
     void updatePistols(float deltaTime);
     void processEvents();
     void update(float deltaTime);
     void render();
-    
+
     void renderPistols();
 
     sf::RenderWindow window;
