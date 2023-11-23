@@ -10,7 +10,7 @@ Player::Player(const std::string& texturePath, const sf::Vector2f& position,
 	const sf::Keyboard::Key down, const sf::Keyboard::Key right,
 	const sf::Color& color, const sf::Keyboard::Key fireKey)
 	: moveUp(up), moveLeft(left), moveDown(down), moveRight(right),
-	velocity(0.0f, 0.0f), isJumping(false), pistol(), fireKey(fireKey) {
+	velocity(0.0f, 0.0f), isJumping(false), pistol(), fireKey(fireKey), direction(Direction::Left){
 	health = MAX_HEALTH;
 
 	if (!texture.loadFromFile(texturePath)) {
@@ -40,9 +40,10 @@ void Player::takeDamage(int amount) {
 
 	healthText.setString(std::to_string(health));
 }
-void Player::fire() {
-	getPistol().fire(getPosition(), sf::Vector2f(1.0f, 0.0f));
+void Player::fire(sf::Vector2f direction) {
+	getPistol().fire(getPosition(), direction);
 }
+
 
 void Player::heal(int amount) {
 	health += amount;
@@ -78,8 +79,9 @@ void Player::handleInput() {
 	}
 	
 	if (sf::Keyboard::isKeyPressed(fireKey)) {
-		fire();
+		fire((direction == Direction::Right) ? sf::Vector2f(1.0f, 0.0f) : sf::Vector2f(-1.0f, 0.0f));
 	}
+
 }
 
 

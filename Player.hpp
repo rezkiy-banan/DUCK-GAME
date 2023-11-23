@@ -24,7 +24,7 @@ public:
     int getHealth() const;
     Pistol& getPistol();
     const Pistol& getPistol() const;
-    void fire();
+    void fire(sf::Vector2f direction);
     Direction direction;
 
 private:
